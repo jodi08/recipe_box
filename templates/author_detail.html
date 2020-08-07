@@ -3,8 +3,27 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
-<h1>Authors Page</h1>
+<div class="container">
 
-<hr>
+    {% if not author %}
 
-{{ my_authors }}
+        <h1>The author you are looking for doesn't seem to exist!</h1>
+
+    {% else %}
+        
+        <h2>{{ author.name }}</h2>
+        <h4>{{ author.bio }}</h4>
+        {% for post in recipe %}
+        <ul>
+            <li>
+                <a href="/recipe/{{ post.id }}/"><p>{{ post.title }}</p></a>
+            </li>
+
+
+        </ul>
+        {% endfor %}
+    
+
+{% endif %}
+
+</div>
