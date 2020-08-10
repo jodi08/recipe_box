@@ -16,6 +16,7 @@ class Recipe(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     description = models.TextField()
     time_required = models.CharField(max_length=25)
+    ingredients = models.TextField()
     instructions = models.TextField()
 
     def __str__(self):

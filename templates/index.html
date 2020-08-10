@@ -1,18 +1,30 @@
+
 <div class="container">
-<h1>Hello, {{ welcome_name }}! </h1>
+<h1> {{ welcome_name }}! </h1>
 
 <hr>
     <ul>
         {% for post in Recipes %}
             
-                <li>
-                    <a href="/recipe/{{ post.id }}/">{{post.title }}</a></li>
+            <li>
+                <a href="/recipe/{{ post.id }}/">{{post.title }}</a></li>
                 
             </li>
+            <br>
+            <hr>
 
+            
         {% endfor %}
-    </ul>       
 
-</div>
+        <a href="/addauthor/" value="Add Author">Add Author</a> 
+        <br>
+        <br>
+        <a href="/addrecipe/" value="Add Recipe">Add Recipe</a>
+    </ul>   
+    
+    
+
+    </div>
+    
 
  
