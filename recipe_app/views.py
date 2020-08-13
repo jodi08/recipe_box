@@ -1,6 +1,8 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse
 from recipe_app.models import Recipe, Author
-from recipe_app.forms import AddRecipeForm, AddAuthorForm
+from recipe_app.forms import AddRecipeForm, AddAuthorForm, LogInForm
+from django.contrib.auth import login, logout, authenticate
+from django.contrib import messages
 
 # Create your views here.
 def main_view(request):
@@ -48,5 +50,26 @@ def add_author(request):
             return HttpResponseRedirect(reverse("homepage"))
     form = AddAuthorForm()
     return render(request, "author_form.html", {"form": form})
+
+def login_view(request):
+    if request.method == "POST":
+        form = LogInForm(request.POST)
+            
+        if form.is_valid():
+            data = form.cleaned_data
+            user = authenticate(request, username=data.get("username"), password=data.get("password"))
+            if user: 
+                login(request, user)
+                return HttpResponseRedirect(reverse("homepage"))
+            
+    form = LogInForm()
+    return render(request, "login_form.html", {"form": form})
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect(reverse("homepage"))
+
+
+
 
 

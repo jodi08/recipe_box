@@ -1,0 +1,17 @@
+<form action="/login/" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <!-- to print out error message -->
+    <!-- {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+        <span style="color:red">
+          {{ message }}
+        </span>
+        
+
+        {% endfor %}
+        </ul>
+        {% endif %} -->
+    <input type="submit" value="Submit">
+</form>

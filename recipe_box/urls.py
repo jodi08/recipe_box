@@ -16,13 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from recipe_app.views import main_view, recipe_detail, author_detail, add_recipe, add_author
+from recipe_app import views
 
 urlpatterns = [
-    path('', main_view, name="homepage"),
-    path('recipe/<int:recipe_id>/', recipe_detail),
-    path('authors/<int:author_id>/', author_detail),
-    path('addrecipe/', add_recipe, name="addrecipe"),
-    path('addauthor/', add_author, name="addauthor"),
+    path('', views.main_view, name="homepage"),
+    path('recipe/<int:recipe_id>/', views.recipe_detail),
+    path('authors/<int:author_id>/', views.author_detail),
+    path('addrecipe/', views.add_recipe, name="addrecipe"),
+    path('addauthor/', views.add_author, name="addauthor"),
+    path('login/', views.login_view, name="loginview"),
+    path('logout/', views.logout_view, name="logoutview"),
     path('admin/', admin.site.urls),
 ]
