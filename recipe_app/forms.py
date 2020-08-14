@@ -13,7 +13,12 @@ class AddRecipeForm(forms.Form):
 class AddAuthorForm(forms.Form):
     name = forms.CharField(max_length = 50)
     bio = forms.CharField(widget=forms.Textarea)
+    username = forms.CharField(max_length=240, initial="")
+    password = forms.CharField(widget=forms.PasswordInput, initial="")
 
 class LogInForm(forms.Form):
     username = forms.CharField(max_length=240, initial="")
     password = forms.CharField(widget=forms.PasswordInput, initial="")
+
+
+    

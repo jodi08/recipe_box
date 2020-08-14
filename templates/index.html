@@ -1,7 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+   
+    <title>Recipe Box</title>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Recipe Box</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/addauthor/">Add Author</a>
+            <a class="nav-link" href="/addrecipe/">Add Recipe</a>
+            <a class="nav-link" href="/logout/">Logout</a>
+          </div>
+        </div>
+      </nav>
+    
+
+
 
 <div class="container">
 <h1> {{ welcome_name }}! </h1>
-<h3>Am I authenticated? {{request.user.is_authenticated}}</h3>
+<h4>Am I logged in? {{request.user.is_authenticated}}</h4>
+{% if request.user.is_authenticated %}
+<h3>Welcome, {{ request.user.author.name }}!</h3>
+{% endif %}
 <hr>    
     <ul>
         {% for post in Recipes %}
@@ -16,15 +47,13 @@
             
         {% endfor %}
 
-        <a href="/addauthor/" value="Add Author">Add Author</a> 
-        <br>
-        <br>
-        <a href="/addrecipe/" value="Add Recipe">Add Recipe</a>
-    </ul>   
+        
+    </ul>  
     
-    
+</div>
 
-    </div>
+</body>
+</html>
     
 
  
