@@ -3,19 +3,22 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
+<a href="/">Home</a> <a href="/recipe/{{recipe.id}}/edit">Edit</a>
 <div class="container">
-
+    
     {% if not recipe %}
-
-        <h1>The recipe you are looking for doesn't seem to exist!</h1>
-
+    
+    <h1>The recipe you are looking for doesn't seem to exist!</h1>
+    
     {% else %}
-
+    
         <h2>{{ recipe.title }}</h2>
         <a href="/authors/{{ recipe.author.id }}/"><h4>{{ recipe.author.name }}</h4></a>
         <p>{{ recipe.description }}</p>
         <p>{{ recipe.instructions }}</p>
-
+        <a href="{% url 'favorite' recipe.pk %}">
+            <button type="submit", name="post_title">Favorite!</button>
+        </a>
     {% endif %}
 
 </div>

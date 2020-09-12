@@ -18,12 +18,26 @@
             <li>
                 <a href="/recipe/{{ post.id }}/"><p>{{ post.title }}</p></a>
             </li>
+                    <form action="{% url 'favorite' post.pk %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit", name="post_title", value="{{ post.id }}">Favorite!</button>
+                    </form>
 
 
         </ul>
         {% endfor %}
     
-
 {% endif %}
+
+<h2>Favorites</h2>
+{% for faves in author.favorites.all %}
+
+<ul>
+    <li>
+        <a href="/recipe/{{ faves.id }}/"><p>{{ faves.title }}</p></a>
+    </li>
+
+</ul>
+{% endfor %}
 
 </div>
