@@ -20,10 +20,12 @@ from recipe_app import views
 
 urlpatterns = [
     path('', views.main_view, name="homepage"),
-    path('recipe/<int:recipe_id>/', views.recipe_detail),
+    path('recipe/<int:recipe_id>/edit', views.recipe_edit_view),
+    path('recipe/<int:recipe_id>/', views.recipe_detail, name="recipe_detail"),
     path('authors/<int:author_id>/', views.author_detail),
     path('addrecipe/', views.add_recipe, name="addrecipe"),
     path('addauthor/', views.add_author, name="addauthor"),
+    path('favorite/<int:pk>/', views.favorite, name='favorite'),
     path('login/', views.login_view, name="loginview"),
     path('logout/', views.logout_view, name="logoutview"),
     path('signup/', views.signup_view, name="signupview"),

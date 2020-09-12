@@ -41,6 +41,10 @@
                 <a href="/recipe/{{ post.id }}/">{{post.title }}</a></li>
                 
             </li>
+            <form action="{% url 'favorite' post.pk %}" method="POST">
+              {% csrf_token %}
+              <button type="submit", name="post_title", value="{{ post.id }}">Favorite!</button>
+          </form>
             <br>
             <hr>
 

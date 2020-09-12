@@ -23,6 +23,33 @@ def author_detail(request, author_id):
     author_recipes = Recipe.objects.filter(author=my_author.id)
     return render(request, 'author_detail.html', {'author': my_author, 'recipe': author_recipes})
 
+@staff_member_required
+@login_required
+def recipe_edit_view(request, recipe_id):
+    recipe = Recipe.objects.get(id=recipe_id)
+    if request.method == "POST":
+        form = AddRecipeForm(request.POST)
+        if form.is_valid():
+            data=form.cleaned_data
+            recipe.title = data['title']
+            recipe.description = data['description']
+            recipe.time_required = data['time_required']
+            recipe.ingredients = data['ingredients']
+            recipe.instructions = data['instructions']
+            recipe.save()
+        return HttpResponseRedirect(reverse("recipe_detail", args=[recipe.id]))
+    
+    data = {
+        "title": recipe.title,
+       "description": recipe.description,
+       "time_required": recipe.time_required,
+       "ingredients": recipe.ingredients,
+       "instructions": recipe.instructions
+    }
+
+    form = AddRecipeForm(initial=data)
+    return render(request, "recipe_form.html", {"form": form})
+
 @login_required
 def add_recipe(request):
     if request.method == "POST":
@@ -42,6 +69,17 @@ def add_recipe(request):
 
     form = AddRecipeForm()
     return render(request, "recipe_form.html", {"form": form})
+
+@login_required
+def favorite(request, pk):
+    my_recipe = Recipe.objects.get(id=pk)
+    my_user = Author.objects.get(user=request.user)
+    my_user.favorites.add(my_recipe)
+    my_user.save()
+    print(my_user.favorites.all())
+    return HttpResponseRedirect(reverse('homepage'))
+    # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 
 @staff_member_required
 @login_required
