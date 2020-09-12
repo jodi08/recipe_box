@@ -70,6 +70,7 @@ def add_recipe(request):
     form = AddRecipeForm()
     return render(request, "recipe_form.html", {"form": form})
 
+@login_required
 def favorite(request, pk):
     my_recipe = Recipe.objects.get(id=pk)
     my_user = Author.objects.get(user=request.user)
